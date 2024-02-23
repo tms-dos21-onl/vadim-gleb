@@ -344,6 +344,67 @@
 
 8. (**) Создать пользователя new_admin_user, Настроить ssh доступ пользователю по ключу на VM, запретить ему авторизацию по паролю
 
+        root@dev:~# adduser new_admin_user //Создаём нового пользователя
+
+            Adding user `new_admin_user' ...
+            Adding new group `new_admin_user' (1001) ...
+            Adding new user `new_admin_user' (1001) with group `new_admin_user' ...
+            Creating home directory `/home/new_admin_user' ...
+            Copying files from `/etc/skel' ...
+            New password:
+            Retype new password:
+            passwd: password updated successfully
+            Changing the user information for new_admin_user
+            Enter the new value, or press ENTER for the default
+                    Full Name []: new_admin_user
+                    Room Number []:
+                    Work Phone []:
+                    Home Phone []:
+                    Other []:
+            Is the information correct? [Y/n] y
+
+        root@dev:~# ssh-keygen //Генерируем ключ
+
+            Generating public/private rsa key pair.
+            Enter file in which to save the key (/root/.ssh/id_rsa):
+            Enter passphrase (empty for no passphrase):
+            Enter same passphrase again:
+            Your identification has been saved in /root/.ssh/id_rsa
+            Your public key has been saved in /root/.ssh/id_rsa.pub
+            The key fingerprint is:
+            SHA256:giqDcyRVu1bfUKLZH5k9DLzu5od/Sq0cDQh19bLV9W4 root@dev
+            The key's randomart image is:
+            +---[RSA 3072]----+
+            |    .   ..+ ... .|
+            |   . . + +.B   .+|
+            |  . . + + +.+ . =|
+            | .   + . =.o . = |
+            |. . + . S.+ . . E|
+            |.o o   .  .  + . |
+            |= o      . .o o  |
+            | =        +o.o.  |
+            |         o.o=o   |
+            +----[SHA256]-----+
+
+        root@dev:~# ssh-copy-id new_admin_user@192.168.120.130  //Копируем ключ
+
+            /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/root/.ssh/id_rsa.pub"
+            /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+            /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+            
+            new_admin_user@192.168.120.130's password:
+
+            Number of key(s) added: 1
+
+            Now try logging into the machine, with:   "ssh 'new_admin_user@192.168.120.130'"
+            and check to make sure that only the key(s) you wanted were added.
+
+        root@dev:~# nano /etc/ssh/sshd_config //Заходим в конфигурационный файл ssh сервера и добавляем в него строки
+
+            Match User new_admin_user
+            PasswordAuthentication no
+
+        root@dev:~# systemctl reload ssh //Перезагружаем службу без полной остановки
 
 9. (**) Вывести список файловых систем, которые поддерживаются ядром
 
