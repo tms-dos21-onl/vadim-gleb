@@ -141,9 +141,43 @@ tmpfs           794M  4.0K  794M   1% /run/user/1000
 ```console
     root@dev:/mnt# usermod -d /mnt/home/penguin penguin  
 ```
-4. Создать новую группу пользователей birds, перенести в нее пользователя penguin.
-5. Cоздать директорию /var/wintering и выдать права на нее только группе birds.
-6. Установить ntpd (или chrony) и разрешить пользователю penguin выполнять команду systemctl restart chronyd (нужны права sudo). Больше узнать о том, что такое NTP и почему он важен можно из следующей статьи.
+## 4. Создать новую группу пользователей birds, перенести в нее пользователя penguin.
+- Создаём новую группу
+```console
+root@dev:/mnt# addgroup birds
+```
+- Добавляем пользователя penguin в birds
+```console
+root@dev:/mnt# usermod -aG birds penguin
+```
+## 5. Cоздать директорию /var/wintering и выдать права на нее только группе birds.
+- Создаём дирректорию
+```console
+root@dev:/mnt# mkdir /var/wintering
+```
+- Выдаём на неё права группе birds
+```console
+root@dev:/mnt# chgrp birds /var/wintering/
+root@dev:/mnt# chmod 070 /var/wintering/
+root@dev:/mnt# ls -la /var/wintering/
+total 8
+d---rwx---  2 root birds 4096 Feb 23 15:43 .
+drwxr-xr-x 14 root root  4096 Feb 23 15:43 ..
+```
+## 6. Установить ntpd (или chrony) и разрешить пользователю penguin выполнять команду systemctl restart chronyd (нужны права sudo). Больше узнать о том, что такое NTP и почему он важен можно из следующей статьи.
+- Устанавливаем ntpd
+```console
+root@dev:~# apt install ntp
+```
+- Редактируем файл /etc/sudoers.tmp
+```console
+root@dev:~# visudo
+```
+- Добавляем в него следующую строку, для того что бы пользователь penguin мог выполнять команду systemctl restart ntp
+```console
+penguin  ALL=NOPASSWD: /bin/systemctl restart ntp
+```
+
 7. (**) Вывод команды iostat -x в последней колонке показывает загрузку дисков в процентах. Откуда утилита это понимает?
 Достаточно ли вывода команды iostat -x для того, чтобы оценить реальную нагрузку на диски, или нужны дополнительные условия или ключи?
 8. (***) Подумать, что сделает команда chmod -x $(which chmod). Выполнить её на виртуальной машине и вернуть всё как было не прибегая к скачиванию\копированию chmod с другого хоста.
