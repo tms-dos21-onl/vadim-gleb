@@ -164,7 +164,7 @@ total 8
 d---rwx---  2 root birds 4096 Feb 23 15:43 .
 drwxr-xr-x 14 root root  4096 Feb 23 15:43 ..
 ```
-## 6. Установить ntpd (или chrony) и разрешить пользователю penguin выполнять команду systemctl restart chronyd (нужны права sudo). Больше узнать о том, что такое NTP и почему он важен можно из следующей статьи.
+## 6. Установить ntpd (или chrony) и разрешить пользователю penguin выполнять команду systemctl restart chronyd (нужны права sudo). 
 - Устанавливаем ntpd
 ```console
 root@dev:~# apt install ntp
