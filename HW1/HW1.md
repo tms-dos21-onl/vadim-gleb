@@ -1,6 +1,6 @@
-Развернуть две виртуальные машины (кто еще не сделал, можно последовательно)
+Развернул виртуальную машину:
 - Ubuntu
-- Centos
+
 
 Затем:
 1. Произвести минимальную настройку (время, локаль, custom motd)
@@ -307,23 +307,80 @@
                 inet6 fe80::20c:29ff:fe21:33/64 scope link
                 valid_lft forever preferred_lft forever
 
-        Добавляем новый сетевой адаптер в виртуальную машину
-        ![добавление нового сетевого интерфейса](https://ibb.co/JndJ5BP)
-        ![добавление нового сетевого интерфейса](https://ibb.co/DtNFNbG)
-        <image src="https://ibb.co/DtNFNbG" alt="Описание картинки">
+    Добавляем новый сетевой адаптер в виртуальную машину
 
- Добавляем новый сетевой адаптер в виртуальную машину
-
-![добавление нового сетевого интерфейса](https://ibb.co/JndJ5BP)
-
-![добавление нового сетевого интерфейса](https://ibb.co/DtNFNbG)
-
- <image src="https://ibb.co/DtNFNbG" alt="Описание картинки">
+    ![добавление нового сетевого интерфейса](/HW1/hw1_1.png)
 
 
+    ![добавление нового сетевого интерфейса](/HW1/hw1_2.png)
+
+        root@dev:~# ip a //Проверяем добавление нового сетевого интерфейса
+
+            1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+                link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+                inet 127.0.0.1/8 scope host lo
+                valid_lft forever preferred_lft forever
+                inet6 ::1/128 scope host
+                valid_lft forever preferred_lft forever
+            2: ens34: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+                link/ether 00:0c:29:21:00:33 brd ff:ff:ff:ff:ff:ff
+                altname enp2s2
+                inet 192.168.120.130/24 metric 100 brd 192.168.120.255 scope global dynamic ens34
+                valid_lft 84186sec preferred_lft 84186sec
+                inet6 fe80::20c:29ff:fe21:33/64 scope link
+                valid_lft forever preferred_lft forever
+            3: ens37: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+                link/ether 00:0c:29:21:00:3d brd ff:ff:ff:ff:ff:ff
+                altname enp2s5
 
 7. (**) Узнать полную информацию об использованной и неиспользованной оперативной памяти
+
+        root@dev:~# free
+
+                        total        used        free      shared  buff/cache   available
+            Mem:         8127504      222024     7602964        1136      302516     7658608
+            Swap:        4194300           0     4194300
+
+
 8. (**) Создать пользователя new_admin_user, Настроить ssh доступ пользователю по ключу на VM, запретить ему авторизацию по паролю
+
+
 9. (**) Вывести список файловых систем, которые поддерживаются ядром
+
+        root@dev:~# cat /proc/filesystems
+
+            nodev   sysfs
+            nodev   tmpfs
+            nodev   bdev
+            nodev   proc
+            nodev   cgroup
+            nodev   cgroup2
+            nodev   cpuset
+            nodev   devtmpfs
+            nodev   configfs
+            nodev   debugfs
+            nodev   tracefs
+            nodev   securityfs
+            nodev   sockfs
+            nodev   bpf
+            nodev   pipefs
+            nodev   ramfs
+            nodev   hugetlbfs
+            nodev   devpts
+                    ext3
+                    ext2
+                    ext4
+                    squashfs
+                    vfat
+            nodev   ecryptfs
+                    fuseblk
+            nodev   fuse
+            nodev   fusectl
+            nodev   efivarfs
+            nodev   mqueue
+            nodev   pstore
+                    btrfs
+            nodev   autofs
+            nodev   binfmt_misc
 
 ** и *** не обязательны к выполнению. Задачи на интерес
