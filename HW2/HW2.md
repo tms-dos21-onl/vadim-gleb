@@ -103,7 +103,7 @@
 root@dev:/mnt# mount /dev/sdb1 /mnt/home/
 
 ```
-- Проверяем резльтат:
+- Проверяем результат:
 ```console
 root@dev:/mnt# df -h
 Filesystem      Size  Used Avail Use% Mounted on
