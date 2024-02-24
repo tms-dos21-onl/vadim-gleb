@@ -353,9 +353,9 @@ node_exporter-1.7.0.linux-386/LICENSE
 node_exporter-1.7.0.linux-386/node_exporter
 node_exporter-1.7.0.linux-386/NOTICE
 
-```console
-- Выдаём права на дирректорию для пользователя vg
 ```
+- Выдаём права на дирректорию для пользователя vg
+```console
 root@dev:/home/service# chown vg node_exporter-1.7.0.linux-386
 root@dev:/home/service# chmod 700 node_exporter-1.7.0.linux-386
 ```
