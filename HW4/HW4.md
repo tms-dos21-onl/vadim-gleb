@@ -205,19 +205,19 @@ root        8794  0.0  0.0  10344  3792 pts/1    R+   20:00   0:00 ps -aux
 ```
 ## 2. Запустить бесконечный процесс в фоновом режиме используя nohup.
 - Запуск процесса, который будет пингвать google.com 
-```
+```console
 root@dev:~# nohup ping google.com &
 [1] 8922
 ```
 ## 3. Убедиться, что процесс продолжил работу после завершения сессии.
 - Ищем процесс с pid 8922 в выводе команды ps -aux
-```
+```console
 root@dev:~# ps -aux | grep 8922
 root        8922  0.0  0.0   7728  1292 pts/1    S    20:10   0:00 ping google.com
 ```
 ## 4. Убить процесс, запущенный в фоновом режиме.
 - Убиваем процесс с помощью команды kill
-```
+```console
 root@dev:~# kill 8922
 root@dev:~# ps -aux | grep 8922
 root        8933  0.0  0.0   6488  2356 pts/1    S+   20:15   0:00 grep --color=auto 8922
@@ -225,12 +225,12 @@ root        8933  0.0  0.0   6488  2356 pts/1    S+   20:15   0:00 grep --color=
 ```
 ## 5. Написать свой сервис под управлением systemd, добавить его в автозагрузку (можно использовать процесс из п.2).
 - Пишем маленький скрипт который будет пинговать google.com, назовём google.sh
-```
+```console
 #!/bin/bash
 ping google.com
 ```
 - После того, как сохранили скрипт ( у меня путь к скрипту будет /home/service/google.sh), заходим по пути /etc/systemd/system и создём службу google.service
-```
+```console
 [Unit]
 Description=google service
 After=network.target
@@ -246,14 +246,14 @@ ExecStart=/home/service/google.sh
 WantedBy=multi-user.target
 ```
 - Так как служба будет запускаться от пользователя vg, мы сделаем его владельцем файла /home/service/google.sh и выдадим ему все права на него, забрав их у остальных пользователей
-```
+```console
 root@dev:/etc/systemd/system# chown vg /home/service/google.sh
 root@dev:/etc/systemd/system# chmod 700 /home/service/google.sh
 root@dev:/etc/systemd/system# ls -l /home/service/google.sh
 -rwx------ 1 vg root 28 Feb 24 20:21 /home/service/google.sh
 ```
 - Запускаем служба, смотрим её статус и добавляем её в автозагрузку
-```
+```console
 root@dev:/etc/systemd/system# systemctl start  google.service
 root@dev:/etc/systemd/system# systemctl status  google.service
 ● google.service - google service
@@ -278,7 +278,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/google.service → /
 ```
 ## 6. Посмотреть логи своего сервиса.
 - Для проверки логов службы обратимся к файлу /var/log/syslog
-```
+```console
 root@dev:~# cat /var/log/syslog | grep "google"
 Feb 24 20:36:21 dev systemd[1]: Started google service.
 Feb 24 20:36:22 dev google.sh[9322]: 64 bytes from waw07s05-in-f14.1e100.net (142.250.186.206): icmp_seq=143 ttl=113 time=42.3 ms
@@ -298,7 +298,7 @@ Feb 24 20:36:32 dev google.sh[9322]: 64 bytes from waw07s05-in-f14.1e100.net (14
 - load average за 15 минут
 - кол-во свободной памяти
 - свободное место в рутовом разделе /
-```
+```console
 #!/bin/bash
 
 proc=$(ps -aux | awk '{print $1}' | grep "$USER" | wc -l)
@@ -313,14 +313,23 @@ echo "Свободная память: $mem_free"
 space=$(df -h | grep "/$"| awk '{print $4}')
 echo "Свободное место в разделе /: $space"
 ```
+- Результат выполнения скрипта
+```console
+root@dev:/home/scripts# sh hw4.sh
+Количество процессов запущенных от текущего пользователя: 192
+Средняя нагрузка на CPU за 15 минут: 0.00%
+Свободная память: 6.4Gi
+Свободное место в разделе /: 85G
+```
+
 ## 8. (**) Добавить в cron задачу, которая будет каждые 10 минут писать в файл результаты выполнения скрипта из п.7
 - Заходим в крон с помощью команды crontab -e
-```
+```console
 */10 * * * * sh /home/scripts/hw4.sh > /home/scripts/hw4.log
 ```
 ## 9. (***) Сделать п. 5 для Prometheus Node Exporter
 - Качаем и распаковываем Prometheus Node Exporter
-```
+```console
 root@dev:/home/service# wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-386.tar.gz
 --2024-02-24 21:21:18--  https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-386.tar.gz
 Resolving github.com (github.com)... 140.82.121.3
@@ -344,14 +353,14 @@ node_exporter-1.7.0.linux-386/LICENSE
 node_exporter-1.7.0.linux-386/node_exporter
 node_exporter-1.7.0.linux-386/NOTICE
 
-```
-- Выдаём права на папку для пользователя vg
+```console
+- Выдаём права на дирректорию для пользователя vg
 ```
 root@dev:/home/service# chown vg node_exporter-1.7.0.linux-386
 root@dev:/home/service# chmod 700 node_exporter-1.7.0.linux-386
 ```
 - Создаём файл node_exporter.service в дирректории /etc/systemd/system
-```
+```console
 [Unit]
 Description=google service
 After=network.target
@@ -367,7 +376,7 @@ ExecStart=/home/service/node_exporter-1.7.0.linux-386/node_exporter
 WantedBy=multi-user.target
 ```
 - Перезапускаем службу systemd для регистрации службы node_exporter и запустить службу node_exporter.
-```
+```console
 root@dev:/home/service# sudo systemctl daemon-reload
 root@dev:/home/service# systemctl start node_exporter
 root@dev:/home/service# systemctl status node_exporter
