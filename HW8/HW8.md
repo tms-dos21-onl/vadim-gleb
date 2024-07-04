@@ -77,11 +77,85 @@ PS D:\git\vadim-gleb\HW8> git add --all
 ```console
 PS D:\git\vadim-gleb\HW8> git commit -am "task 6: Hello DevOps"
 ```
+<<<<<<< HEAD
 7. Сделать реверт последнего коммита. Вывести последние 3 коммитa с помощью git log.
 8. Удалить последние 3 коммита с помощью git reset.
 9. Вернуть коммит, где добавляется пустой файл README.md. Для этого найти ID коммита в git reflog, а затем сделать cherry-pick.
 10. Удалить последний коммит с помощью git reset.
 11. Переключиться на ветку main или master. Если ветка называется master, то переименовать её в main.
+=======
+## 7. Сделать реверт последнего коммита. Вывести последние 3 коммитa с помощью git log.
+```console
+PS D:\git\vadim-gleb\HW8> git revert HEAD
+[main 3ef0009] Revert "task 6: Hello DevOps"
+ 2 files changed, 3 insertions(+), 21 deletions(-)
+```
+```console
+PS D:\git\vadim-gleb\HW8> git log -3
+commit 3ef0009432306e7f65c925181348795285b16340 (HEAD -> main)
+Author: glebvadims <gleb.vadim.s@gmail.com>
+Date:   Thu Jul 4 22:14:24 2024 +0300
+
+    Revert "task 6: Hello DevOps"
+
+    This reverts commit c3a3ae3776c2a0b611510e31477e4c55bcde6f80.
+
+commit c3a3ae3776c2a0b611510e31477e4c55bcde6f80 (origin/main, origin/HEAD)
+Author: glebvadims <gleb.vadim.s@gmail.com>
+Date:   Thu Jul 4 22:12:30 2024 +0300
+
+    task 6: Hello DevOps
+
+commit 8905667b45e8002577e81f7ef68e50c9e5473210
+Author: glebvadims <gleb.vadim.s@gmail.com>
+Date:   Thu Jul 4 22:05:56 2024 +0300
+
+    task 5
+```
+## 8. Удалить последние 3 коммита с помощью git reset.
+```console
+PS D:\git\vadim-gleb\HW8> git reset HEAD~3 --hard
+HEAD is now at 0fc9435 Сделаны задания 1-4
+```
+## 9. Вернуть коммит, где добавляется пустой файл README.md. Для этого найти ID коммита в git reflog, а затем сделать cherry-pick.
+- Находим нужный нам id:  8905667 HEAD@{3}: commit: task 5
+```console
+PS D:\git\vadim-gleb\HW8> git reflog
+0fc9435 (HEAD -> main) HEAD@{0}: reset: moving to HEAD~3
+3ef0009 HEAD@{1}: revert: Revert "task 6: Hello DevOps"
+c3a3ae3 (origin/main, origin/HEAD) HEAD@{2}: commit: task 6: Hello DevOps
+8905667 HEAD@{3}: commit: task 5
+0fc9435 (HEAD -> main) HEAD@{4}: reset: moving to HEAD~2
+b6ac148 HEAD@{5}: reset: moving to b6ac1480efe1ea0ca3ab53b5eafe347c59e52b98
+b6ac148 HEAD@{6}: commit: task 5
+b73bf78 HEAD@{7}: commit: task 5
+0fc9435 (HEAD -> main) HEAD@{8}: pull --tags origin main: Fast-forward
+6cc542f HEAD@{9}: reset: moving to HEAD~2
+b803aff HEAD@{10}: reset: moving to HEAD~1
+47af149 HEAD@{11}: reset: moving to HEAD
+47af149 HEAD@{12}: commit: task 8
+b803aff HEAD@{13}: reset: moving to HEAD~3
+0aff9eb HEAD@{14}: commit: task 7
+954b59a HEAD@{15}: revert: Revert "task 6"
+edea2f6 HEAD@{16}: reset: moving to edea2f6cbdcde1afbe8e5f047105b85e9ca42599
+edea2f6 HEAD@{17}: commit: task 6
+b803aff HEAD@{18}: commit: task 5
+```
+- Возвращаем коммит
+```console
+PS D:\git\vadim-gleb\HW8> git cherry-pick 8905667
+[main f938c5e] task 5
+ Date: Thu Jul 4 22:05:56 2024 +0300
+ 2 files changed, 17 insertions(+)
+ create mode 100644 HW8/README.md
+```
+## 10. Удалить последний коммит с помощью git reset.
+```console
+PS D:\git\vadim-gleb\HW8> git reset --hard HEAD~1
+HEAD is now at 0fc9435 Сделаны задания 1-4
+```
+## 11. Переключиться на ветку main или master. Если ветка называется master, то переименовать её в main.
+>>>>>>> cf0e349 (Tasks 1-10 completed)
 12. Скопировать файл https://github.com/tms-dos21-onl/_sandbox/blob/main/.github/workflows/validate-shell.yaml, положить его по такому же относительному пути в репозиторий. Создать коммит и запушить его в удаленный репозиторий.
 13. Создать из ветки main ветку develop. Переключиться на неё и создать README.md в корне репозитория. Написать в этом файле какие инструменты DevOps вам знакомы и с какими вы бы хотели познакомиться больше всего (2-3 пункта). Сделать коммит.
 
