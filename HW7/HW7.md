@@ -85,10 +85,10 @@ Jul 04 13:55:20 dev python3[10368]: Watching for file changes with StatReloader
 Jul 04 13:55:46 dev python3[10368]: [04/Jul/2024 10:55:46] "GET /api/tutorials HTTP/1.1" 200 304
 ```
 
-- Для исправления ошибки при запуске backend вносим изменения в файл по пути etc/bezkoder/backend/DjangoRestApi/DjangoRestApi/settings.py
+- Для исправления ошибки при запуске backend вносим изменения в файл по пути app/bezkoder/backend/DjangoRestApi/DjangoRestApi/settings.py
 
 ```console
-root@dev:/etc/systemd/system# nano /app/bezkoder/backend/DjangoRestApi/DjangoRestApi/settings.py
+root@dev:/app/systemd/system# nano /app/bezkoder/backend/DjangoRestApi/DjangoRestApi/settings.py
 
 ALLOWED_HOSTS = ['192.168.120.133']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
