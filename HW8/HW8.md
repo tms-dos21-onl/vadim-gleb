@@ -42,6 +42,23 @@ Date:   Thu Jul 4 17:21:04 2024 +0300
     start hw8
 ```
 ## 5. Создать пустой файл README.md и сделать коммит.
+```console
+PS D:\git\vadim-gleb\HW8> new-item README.md
+
+
+    Каталог: D:\git\vadim-gleb\HW8
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        04.07.2024     22:03              0 README.md
+```
+```console
+PS D:\git\vadim-gleb\HW8> git add README.md 
+```
+```console
+PS D:\git\vadim-gleb\HW8> git add README.md 
+```
 6. Добавить фразу "Hello, DevOps" в README.md файл и сделать коммит.
 7. Сделать реверт последнего коммита. Вывести последние 3 коммитa с помощью git log.
 8. Удалить последние 3 коммита с помощью git reset.
