@@ -32,7 +32,7 @@ root@dev:~# cp -r django-rest-api/. /app/bezkoder/backend
 root@dev:~# cp -r react-crud-web-api/. /eapp/bezkoder/frontend/
 
 ```
-- Создаём юзера под которым будет работать демон и даём ему права на базу данных
+- Создаём юзера под которым будет работать backend демон и даём ему права на базу данных
 ```console
 root@dev:~# adduser bezkoder
 root@dev:~# chown bezkoder:bezkoder /app/bezkoder/backend/DjangoRestApi/db.sqlite3 /app/bezkoder/backend/DjangoRestApi/
@@ -53,12 +53,13 @@ User=backend
 WantedBy=multi-user.target
 
 ```
+
 - Запускаем демона и проверяем его работу
 ```console
-root@dev:/etc/systemd/system# systemctl enable bezkoder.service
-Created symlink /etc/systemd/system/multi-user.target.wants/bezkoder.service → /etc/systemd/system/bezkoder.service.
-root@dev:/etc/systemd/system# systemctl start bezkoder.service
-root@dev:/etc/systemd/system# systemctl status bezkoder.service
+root@dev:/etc/systemd/system# systemctl enable bezkoder.back.service
+Created symlink /etc/systemd/system/multi-user.target.wants/bezkoder.back.service → /etc/systemd/system/bezkoder.back.service.
+root@dev:/etc/systemd/system# systemctl start bezkoder.back.service
+root@dev:/etc/systemd/system# systemctl status bezkoder.back.service
 vg@dev:/app/bezkoder/backend/DjangoRestApi$ sudo systemctl status  bezkoder.back.service
 ● bezkoder.back.service - bezkoder backend app
      Loaded: loaded (/etc/systemd/system/bezkoder.back.service; enabled; preset: enabled)
@@ -87,7 +88,7 @@ Jul 04 13:55:46 dev python3[10368]: [04/Jul/2024 10:55:46] "GET /api/tutorials H
 - Для исправления ошибки при запуске backend вносим изменения в файл по пути etc/bezkoder/backend/DjangoRestApi/DjangoRestApi/settings.py
 
 ```console
-root@dev:/etc/systemd/system# nano /etc/bezkoder/backend/DjangoRestApi/DjangoRestApi/settings.py
+root@dev:/etc/systemd/system# nano /app/bezkoder/backend/DjangoRestApi/DjangoRestApi/settings.py
 
 ALLOWED_HOSTS = ['192.168.120.133']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -96,14 +97,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 - Настраиваем frontend
 
 ```console
-root@dev:~$ sudo sed -i "/try_files \$uri \$uri\/ =404;/try_files \$uri \$uri\/ \$uri.html \/index.html;/" /etc/nginx/sites-available/default
-root@dev:~$ cd /etc/bezkoder/frontend
-root@dev:/etc/bezkoder/frontend$ sudo npm install
-root@dev:/etc/bezkoder/frontend$ sudo npm run build
-root@dev:/etc/bezkoder/frontend$ sudo cp -r /etc/bezkoder/frontend/build/. /var/www/html
-root@dev:/etc/bezkoder/frontend$ sudo npm start
+root@dev:~$ cd /app/bezkoder/frontend
+root@dev:/app/bezkoder/frontend$ sudo npm install
+root@dev:/app/bezkoder/frontend$ sudo npm run build
+root@dev:/app/bezkoder/frontend$ sudo cp -r /etc/bezkoder/frontend/build/. /var/www/html
+root@dev:/app/bezkoder/frontend$ sudo npm start
 ```
-- Создаём юзера под которым будет работать демон и даём ему права на базу данных
+- Создаём юзера под которым будет работать демон и даём ему права на frontend
 ```console
 root@dev:~# adduser frontend
 root@dev:~# chown -R frontend:frontend  /app/bezkoder/frontend
@@ -152,9 +152,5 @@ Jul 04 13:45:57 dev npm[10220]: Note that the development build is not optimized
 Jul 04 13:45:57 dev npm[10220]: To create a production build, use yarn build.
 Jul 04 13:45:57 dev npm[10220]: webpack compiled successfully
 ```
-
-
-## 4. (**) Познакомиться с инструментом для создания образов VM - Packer - на примерах создания образов для Virtualbox & Hyper-V. Попробовать написать свой шаблон для создания образа VM.
-
 
 
