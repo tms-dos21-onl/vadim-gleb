@@ -1,8 +1,8 @@
-## 1. Познакомиться с веб-приложением
+## 1. Ознокомился с веб-приложением
 - backend
 - frontend
-## 2. Познакомиться с вариантами хостинга этого веб-приложения:
-App-Hosting-Options
+## 2. Ознокомился с вариантами хостинга этого веб-приложения:
+
 ## 3. Установить веб-приложение (backend + frontend) на Linux VM и настроить запуск через SystemD
 - Устанавливаем гит на сервер
 ```console
@@ -122,7 +122,7 @@ ALLOWED_HOSTS = ['192.168.120.133'] # Добавляем свой IP
 - Вывод страницы после исправления ошибки
 ![Ошибка при запуске backend](/HW7/images/hw7_backend.png)
 
-- Для исправления ошибки вносим изменения в файл по пути etc/bezkoder/backend/DjangoRestApi/DjangoRestApi/settings.py
+- Настраиваем frontend
 
 ```console
 root@dev:~$ sudo sed -i "s/try_files \$uri \$uri\/ =404;/try_files \$uri \$uri\/ \$uri.html \/index.html;/" /etc/nginx/sites-available/default
@@ -133,7 +133,6 @@ root@dev:/etc/bezkoder/frontend$ sudo cp -r /etc/bezkoder/frontend/build/. /var/
 root@dev:/etc/bezkoder/frontend$ sudo npm start
 ```
 - Проверяем запуск фронтенда
-
 
 ![Старт npm](/HW7/images/hw7_npm.png)
 ![Проверка frontend](/HW7/images/hw7_frontend.png)
