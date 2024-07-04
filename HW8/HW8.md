@@ -54,12 +54,29 @@ Mode                 LastWriteTime         Length Name
 -a----        04.07.2024     22:03              0 README.md
 ```
 ```console
-PS D:\git\vadim-gleb\HW8> git add README.md 
+PS D:\git\vadim-gleb\HW8> git add --all 
 ```
 ```console
-PS D:\git\vadim-gleb\HW8> git add README.md 
+PS D:\git\vadim-gleb\HW8> git commit -am "task 5" 
 ```
-6. Добавить фразу "Hello, DevOps" в README.md файл и сделать коммит.
+## 6. Добавить фразу "Hello, DevOps" в README.md файл и сделать коммит.
+```console
+PS D:\git\vadim-gleb\HW8> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   HW8.md
+        modified:   README.md
+```
+```console
+PS D:\git\vadim-gleb\HW8> git add --all
+```
+```console
+PS D:\git\vadim-gleb\HW8> git commit -am "task 6: Hello DevOps"
+```
 7. Сделать реверт последнего коммита. Вывести последние 3 коммитa с помощью git log.
 8. Удалить последние 3 коммита с помощью git reset.
 9. Вернуть коммит, где добавляется пустой файл README.md. Для этого найти ID коммита в git reflog, а затем сделать cherry-pick.
