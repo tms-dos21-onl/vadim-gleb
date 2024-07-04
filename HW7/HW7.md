@@ -29,7 +29,7 @@ root@dev:~# mkdir /app/bezkoder
 root@dev:~# mkdir /app/bezkoder/frontend
 root@dev:~# mkdir /app/bezkoder/backend
 root@dev:~# cp -r django-rest-api/. /app/bezkoder/backend
-root@dev:~# cp -r react-crud-web-api/. /eapp/bezkoder/frontend/
+root@dev:~# cp -r react-crud-web-api/. /app/bezkoder/frontend/
 
 ```
 - Создаём юзера под которым будет работать backend демон и даём ему права на базу данных
@@ -100,7 +100,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 root@dev:~$ cd /app/bezkoder/frontend
 root@dev:/app/bezkoder/frontend$ sudo npm install
 root@dev:/app/bezkoder/frontend$ sudo npm run build
-root@dev:/app/bezkoder/frontend$ sudo cp -r /etc/bezkoder/frontend/build/. /var/www/html
+root@dev:/app/bezkoder/frontend$ sudo cp -r /app/bezkoder/frontend/build/. /var/www/html
 root@dev:/app/bezkoder/frontend$ sudo npm start
 ```
 - Создаём юзера под которым будет работать демон и даём ему права на frontend
