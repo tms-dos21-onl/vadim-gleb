@@ -179,6 +179,7 @@ Mode                 LastWriteTime         Length Name
 -a----        05.07.2024     14:42            497 validate-shell.yaml
 ```
 ## 13. Создать из ветки main ветку develop. Переключиться на неё и создать README.md в корне репозитория. Написать в этом файле какие инструменты DevOps вам знакомы и с какими вы бы хотели познакомиться больше всего (2-3 пункта). Сделать коммит.
+<<<<<<< HEAD
 ```console
 PS C:\git\tms-dos21\vadim-gleb> git checkout -b develop
 Switched to a new branch 'develop'
@@ -338,6 +339,12 @@ PS C:\git\tms-dos21\vadim-gleb> git commit -m "merge support to main"
 PS C:\git\tms-dos21\vadim-gleb> git merge support    
 Already up to date.
 ```
+=======
+
+14. Создать из ветки main ветку support и создать там файл LICENSE в корне репозитория с содержимым https://www.apache.org/licenses/LICENSE-2.0.txt. Сделать коммит. Вывести последние 3 коммитa.
+15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
+16. Сделать merge ветки support в ветку main и решить конфликты путем выбора содержимого любой одной лицензии.
+>>>>>>> 63c1e2f (task 13)
 17. Переключиться на ветку develop и сделать rebase относительно ветки main.
 18. Вывести историю последних 10 коммитов в виде графа с помощью команды git log -10 --oneline --graph.
 19. Запушить ветку develop. В истории коммитов должен быть мерж support -> main.
