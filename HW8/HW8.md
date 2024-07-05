@@ -245,6 +245,7 @@ Date:   Thu Jul 4 22:42:06 2024 +0300
 
     task 11
 ```
+<<<<<<< HEAD
 ## 15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
 ```console
 PS C:\git\tms-dos21\vadim-gleb> git checkout main              
@@ -286,6 +287,9 @@ Date:   Thu Jul 4 22:42:06 2024 +0300
 
     task 11
 ```
+=======
+15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
+>>>>>>> support
 16. Сделать merge ветки support в ветку main и решить конфликты путем выбора содержимого любой одной лицензии.
 17. Переключиться на ветку develop и сделать rebase относительно ветки main.
 18. Вывести историю последних 10 коммитов в виде графа с помощью команды git log -10 --oneline --graph.
