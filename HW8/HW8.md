@@ -179,7 +179,6 @@ Mode                 LastWriteTime         Length Name
 -a----        05.07.2024     14:42            497 validate-shell.yaml
 ```
 ## 13. Создать из ветки main ветку develop. Переключиться на неё и создать README.md в корне репозитория. Написать в этом файле какие инструменты DevOps вам знакомы и с какими вы бы хотели познакомиться больше всего (2-3 пункта). Сделать коммит.
-<<<<<<< HEAD
 ```console
 PS C:\git\tms-dos21\vadim-gleb> git checkout -b develop
 Switched to a new branch 'develop'
@@ -339,13 +338,65 @@ PS C:\git\tms-dos21\vadim-gleb> git commit -m "merge support to main"
 PS C:\git\tms-dos21\vadim-gleb> git merge support    
 Already up to date.
 ```
-=======
-
-14. Создать из ветки main ветку support и создать там файл LICENSE в корне репозитория с содержимым https://www.apache.org/licenses/LICENSE-2.0.txt. Сделать коммит. Вывести последние 3 коммитa.
-15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
-16. Сделать merge ветки support в ветку main и решить конфликты путем выбора содержимого любой одной лицензии.
->>>>>>> 63c1e2f (task 13)
-17. Переключиться на ветку develop и сделать rebase относительно ветки main.
-18. Вывести историю последних 10 коммитов в виде графа с помощью команды git log -10 --oneline --graph.
-19. Запушить ветку develop. В истории коммитов должен быть мерж support -> main.
-20. Зайти в свой репозиторий на GitHub и создать Pull Request из ветки develop в ветку main.
+## 17. Переключиться на ветку develop и сделать rebase относительно ветки main.
+```console
+PS C:\git\tms-dos21\vadim-gleb> git checkout develop
+Switched to branch 'develop'
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git rebase main
+Auto-merging HW8/HW8.md
+CONFLICT (content): Merge conflict in HW8/HW8.md
+error: could not apply 63c1e2f... task 13
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+Could not apply 63c1e2f... task 13
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git add --all
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git rebase --continue
+[detached HEAD 2f32f66] task 13
+ 3 files changed, 14 insertions(+)
+ create mode 100644 HW8/images/Readme_content.png
+ create mode 100644 README.md
+Successfully rebased and updated refs/heads/develop.
+```
+## 18. Вывести историю последних 10 коммитов в виде графа с помощью команды git log -10 --oneline --graph.
+```console
+PS C:\git\tms-dos21\vadim-gleb> git log -10 --oneline --graph
+* 2f32f66 (HEAD -> develop) task 13
+* 532d69e (main) task 16 final
+*   6e63ed9 merge support to main
+|\
+| * 716e23a (support) errors task 14
+| * b5fad31 errors
+* | 6ebde79 errors task 15
+* | 0faac13 errors
+* | ac226bc (origin/main, origin/HEAD) Merge branch 'support'
+|\|
+| * dd3fd99 task 14: final
+| * 3d3ff88 task 14
+```
+## 19. Запушить ветку develop. В истории коммитов должен быть мерж support -> main.
+```console
+PS C:\git\tms-dos21\vadim-gleb> git push origin develop      
+Enumerating objects: 30, done.
+Counting objects: 100% (30/30), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (22/22), done.
+Writing objects: 100% (23/23), 67.28 KiB | 6.73 MiB/s, done.
+Total 23 (delta 10), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (10/10), completed with 3 local objects.
+remote: 
+remote: Create a pull request for 'develop' on GitHub by visiting:
+remote:      https://github.com/tms-dos21-onl/vadim-gleb/pull/new/develop
+remote:
+To https://github.com/tms-dos21-onl/vadim-gleb
+ * [new branch]      develop -> develop
+```
+## 20. Зайти в свой репозиторий на GitHub и создать Pull Request из ветки develop в ветку main.
+- Выполнено
