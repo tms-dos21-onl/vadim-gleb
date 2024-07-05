@@ -245,7 +245,6 @@ Date:   Thu Jul 4 22:42:06 2024 +0300
 
     task 11
 ```
-<<<<<<< HEAD
 ## 15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
 ```console
 PS C:\git\tms-dos21\vadim-gleb> git checkout main              
@@ -287,10 +286,58 @@ Date:   Thu Jul 4 22:42:06 2024 +0300
 
     task 11
 ```
-=======
-15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
->>>>>>> support
-16. Сделать merge ветки support в ветку main и решить конфликты путем выбора содержимого любой одной лицензии.
+
+## 15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
+```console
+PS C:\git\tms-dos21\vadim-gleb> git checkout main   
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 1 commit.
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> Invoke-WebRequest https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt -OutFile .\LICENSE.txt 
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git add --all
+warning: in the working copy of 'LICENSE.txt', LF will be replaced by CRLF the next time Git touches it
+PS C:\git\tms-dos21\vadim-gleb> git commit -am "errors task 15"
+[main 6ebde79] errors task 15
+ 1 file changed, 2487 insertions(+), 20 deletions(-)
+```
+## 16. Сделать merge ветки support в ветку main и решить конфликты путем выбора содержимого любой одной лицензии.
+```console
+PS C:\git\tms-dos21\vadim-gleb> git merge support
+CONFLICT (rename/delete): LICENSE-2.0.txt renamed to LICENSE.txt in support, but deleted in HEAD.
+Auto-merging LICENSE.txt
+CONFLICT (add/add): Merge conflict in LICENSE.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git status       
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both added:      LICENSE.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git add .\LICENSE.txt
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git commit -m "merge support to main" 
+[main 6e63ed9] merge support to main
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git merge support    
+Already up to date.
+```
 17. Переключиться на ветку develop и сделать rebase относительно ветки main.
 18. Вывести историю последних 10 коммитов в виде графа с помощью команды git log -10 --oneline --graph.
 19. Запушить ветку develop. В истории коммитов должен быть мерж support -> main.
