@@ -153,6 +153,7 @@ PS D:\git\vadim-gleb\HW8> git branch
 * main
 ```
 ## 12. Скопировать файл https://github.com/tms-dos21-onl/_sandbox/blob/main/.github/workflows/validate-shell.yaml, положить его по такому же относительному пути в репозиторий. Создать коммит и запушить его в удаленный репозиторий.
+- Создаём дирректорию
 ```console
 PS C:\git\tms-dos21\vadim-gleb> mkdir .\.github\workflows
 
@@ -164,6 +165,7 @@ Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----        05.07.2024     14:35                workflows
 ```
+- Забираем файл
 ```console
 PS C:\git\tms-dos21\vadim-gleb\.github\workflows> Invoke-WebRequest https://raw.githubusercontent.com/tms-dos21-onl/_sandbox/main/.github/workflows/validate-shell.yaml?token=GHSAT0AAAAAACUK3HU7BCEE6RDHSKFJ2A6MZUH3RRA -OutFile .\validate-shell.yaml
 PS C:\git\tms-dos21\vadim-gleb\.github\workflows> ls
@@ -176,8 +178,73 @@ Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----        05.07.2024     14:42            497 validate-shell.yaml
 ```
-13. Создать из ветки main ветку develop. Переключиться на неё и создать README.md в корне репозитория. Написать в этом файле какие инструменты DevOps вам знакомы и с какими вы бы хотели познакомиться больше всего (2-3 пункта). Сделать коммит.
-14. Создать из ветки main ветку support и создать там файл LICENSE в корне репозитория с содержимым https://www.apache.org/licenses/LICENSE-2.0.txt. Сделать коммит. Вывести последние 3 коммитa.
+## 13. Создать из ветки main ветку develop. Переключиться на неё и создать README.md в корне репозитория. Написать в этом файле какие инструменты DevOps вам знакомы и с какими вы бы хотели познакомиться больше всего (2-3 пункта). Сделать коммит.
+```console
+PS C:\git\tms-dos21\vadim-gleb> git checkout -b develop
+Switched to a new branch 'develop'
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git branch
+* develop
+  main
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> new-item README.md     
+
+
+    Каталог: C:\git\tms-dos21\vadim-gleb
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        05.07.2024     14:54              0 README.md
+```
+- Содержимое файла README.md в корне репозитория
+ ![Содержимое файла README.md в корне репозитория](/vadim-gleb/HW8/images/Readme_content.png)
+- Коммит 
+ ```console
+PS C:\git\tms-dos21\vadim-gleb> git add --all
+PS C:\git\tms-dos21\vadim-gleb> git commit -am "task 13"
+[develop 63c1e2f] task 13
+ 3 files changed, 11 insertions(+), 1 deletion(-)
+ create mode 100644 HW8/images/Readme_content.png
+ create mode 100644 README.md
+```
+## 14. Создать из ветки main ветку support и создать там файл LICENSE в корне репозитория с содержимым https://www.apache.org/licenses/LICENSE-2.0.txt. Сделать коммит. Вывести последние 3 коммитa.
+```console
+PS C:\git\tms-dos21\vadim-gleb> git checkout -b support      
+Switched to a new branch 'support'
+PS C:\git\tms-dos21\vadim-gleb> git branch
+  develop
+  main
+* support
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> Invoke-WebRequest https://www.apache.org/licenses/LICENSE-2.0.txt -OutFile .\LICENSE-2.0.txt        
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git add --all                
+warning: in the working copy of 'LICENSE-2.0.txt', LF will be replaced by CRLF the next time Git touches it
+PS C:\git\tms-dos21\vadim-gleb> git commit --am "task 14"
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb> git log -3
+commit 3d3ff8899a80ff8444ac48ce5451fb6c2feb96dd (HEAD -> support)
+Author: glebvadims <gleb.vadim.s@gmail.com>
+Date:   Fri Jul 5 16:09:10 2024 +0300
+
+    task 14
+
+commit 3feeffacf77eef5b2d4ea5e087a717d9345fef32 (origin/main, origin/HEAD, main)
+Author: glebvadims <gleb.vadim.s@gmail.com>
+Date:   Fri Jul 5 14:47:30 2024 +0300
+
+commit 2f338a61dcb805bba5598245f07a930e1e1ba864
+Author: glebvadims <gleb.vadim.s@gmail.com>
+Date:   Thu Jul 4 22:42:06 2024 +0300
+
+    task 11
+```
 15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
 16. Сделать merge ветки support в ветку main и решить конфликты путем выбора содержимого любой одной лицензии.
 17. Переключиться на ветку develop и сделать rebase относительно ветки main.
