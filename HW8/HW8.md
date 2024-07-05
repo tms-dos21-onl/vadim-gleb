@@ -153,10 +153,30 @@ PS D:\git\vadim-gleb\HW8> git branch
 * main
 ```
 ## 12. Скопировать файл https://github.com/tms-dos21-onl/_sandbox/blob/main/.github/workflows/validate-shell.yaml, положить его по такому же относительному пути в репозиторий. Создать коммит и запушить его в удаленный репозиторий.
+```console
+PS C:\git\tms-dos21\vadim-gleb> mkdir .\.github\workflows
+
+
+    Каталог: C:\git\tms-dos21\vadim-gleb\.github
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        05.07.2024     14:35                workflows
+```
+```console
+PS C:\git\tms-dos21\vadim-gleb\.github\workflows> Invoke-WebRequest https://raw.githubusercontent.com/tms-dos21-onl/_sandbox/main/.github/workflows/validate-shell.yaml?token=GHSAT0AAAAAACUK3HU7BCEE6RDHSKFJ2A6MZUH3RRA -OutFile .\validate-shell.yaml
+PS C:\git\tms-dos21\vadim-gleb\.github\workflows> ls
+
+
+    Каталог: C:\git\tms-dos21\vadim-gleb\.github\workflows
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        05.07.2024     14:42            497 validate-shell.yaml
+```
 13. Создать из ветки main ветку develop. Переключиться на неё и создать README.md в корне репозитория. Написать в этом файле какие инструменты DevOps вам знакомы и с какими вы бы хотели познакомиться больше всего (2-3 пункта). Сделать коммит.
-
-> ⚠️ Для выполнения задания использовать Markdown, а именно заголовок и списки
-
 14. Создать из ветки main ветку support и создать там файл LICENSE в корне репозитория с содержимым https://www.apache.org/licenses/LICENSE-2.0.txt. Сделать коммит. Вывести последние 3 коммитa.
 15. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Сделать коммит. Вывести последние 3 коммитa.
 16. Сделать merge ветки support в ветку main и решить конфликты путем выбора содержимого любой одной лицензии.
