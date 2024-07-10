@@ -211,7 +211,7 @@ drwx------  3 vg   vg   4096 Jul 10 11:17 vg
 vg@dev:~$ sudo apt install htop
 ```
 - Отсторировав список процессов по CPU, видим что первое место делят два процесса vmtoolsd и htop
-![Потребление cpu](/vadim-gleb/HW9/images/htop.png)
+![Потребление cpu](/HW9/images/htop.png)
 
 ## 18. Вывести логи сервиса Firewall с помощью journalctl не прибегая к фильтрации с помощью grep.
 - Фильтруем журнал по определённому юниту
